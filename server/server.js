@@ -69,16 +69,16 @@ Use this exact format:
 # 🚀 Optimized Code
 `;
 
-        const interaction = await ai.interactions.create({
-            model: "gemini-3.5-flash",
-            input: prompt,
+        const response = await ai.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: prompt,
         });
 
-        console.log(interaction.output_text);
+        console.log(response.text);
 
         res.json({
             success: true,
-            review: interaction.output_text,
+            review: response.text,
         });
 
     } catch (error) {
@@ -114,14 +114,14 @@ Rules:
 - Use headings and bullet points.
 `;
 
-        const interaction = await ai.interactions.create({
-            model: "gemini-3.5-flash",
-            input: prompt,
+        const response = await ai.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: prompt,
         });
 
         res.json({
             success: true,
-            explanation: interaction.output_text,
+            explanation: response.text,
         });
 
     } catch (error) {
@@ -160,14 +160,14 @@ Keep the answer:
 - Short unless more detail is requested.
 `;
 
-        const interaction = await ai.interactions.create({
-            model: "gemini-3.5-flash",
-            input: prompt,
+        const response = await ai.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: prompt,
         });
 
         res.json({
             success: true,
-            answer: interaction.output_text,
+            answer: response.text,
         });
 
     } catch (error) {
