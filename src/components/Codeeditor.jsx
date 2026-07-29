@@ -136,7 +136,7 @@ function CodeEditor({
 
         try {
 
-            const response = await fetch("http://localhost:5000/review", {
+           const response = await fetch("https://ai-code-reviewer-z00c.onrender.com/review", {
                 method: "POST",
 
                 headers: {
@@ -215,7 +215,7 @@ function CodeEditor({
 
         try {
 
-            const response = await fetch("http://localhost:5000/explain", {
+           const response = await fetch("https://ai-code-reviewer-z00c.onrender.com/explain", {
                 method: "POST",
 
                 headers: {

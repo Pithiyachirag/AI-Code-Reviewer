@@ -1,41 +1,42 @@
-
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 function Navbar({ darkMode, setDarkMode }) {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("home");
   useEffect(() => {
-  const handleScroll = () => {
-    const home = document.getElementById("home");
-    const editor = document.getElementById("editor");
-    const history = document.getElementById("history");
+    const handleScroll = () => {
+      const home = document.getElementById("home");
+      const editor = document.getElementById("editor");
+      const history = document.getElementById("history");
+      
+      const scrollY = window.scrollY + 120;
 
-    const scrollY = window.scrollY + 120;
+      if (
+        history &&
+        scrollY >= history.offsetTop
+      ) {
+        setActive("history");
+      } else if (
+        editor &&
+        scrollY >= editor.offsetTop
+      ) {
+        setActive("editor");
+      } else {
+        setActive("home");
+      }
+    };
 
-    if (
-      history &&
-      scrollY >= history.offsetTop
-    ) {
-      setActive("history");
-    } else if (
-      editor &&
-      scrollY >= editor.offsetTop
-    ) {
-      setActive("editor");
-    } else {
-      setActive("home");
-    }
-  };
+    window.addEventListener("scroll", handleScroll);
 
-  window.addEventListener("scroll", handleScroll);
+    handleScroll();
 
-  handleScroll();
-
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-  };
-}, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-gray-200 dark:bg-gray-800/90 dark:border-gray-700 transition-all duration-300">
+    <nav className="w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 transition-all duration-300">
       <div className="max-w-7xl mx-auto h-16 px-6 flex items-center justify-between">
 
         {/* Logo */}
@@ -60,14 +61,11 @@ function Navbar({ darkMode, setDarkMode }) {
         <div className="hidden md:flex items-center gap-6 text-gray-700 dark:text-gray-200 font-medium">
           <button
             onClick={() => {
-              
-              document.getElementById("home")?.scrollIntoView({
-                behavior: "smooth",
-              });
+              setActive("home");
+              navigate("/");
+              setMenuOpen(false);
             }}
-            className={`px-4 py-2 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-lg ${active === "home"
-              ? "bg-blue-600 text-white shadow-lg"
-              : ""
+            className={`px-4 py-2 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-lg ${active === "home" ? "bg-blue-600 text-white shadow-lg" : ""
               }`}
           >
             Home
@@ -88,14 +86,12 @@ function Navbar({ darkMode, setDarkMode }) {
           </button>
 
           <button
-            onClick={() =>
-              document.getElementById("history")?.scrollIntoView({
-                behavior: "smooth",
-              })
-            }
-            className={`px-4 py-2 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-lg ${active === "history"
-              ? "bg-blue-600 text-white shadow-lg"
-              : ""
+            onClick={() => {
+              setActive("history");
+              navigate("/history");
+              setMenuOpen(false);
+            }}
+            className={`px-4 py-2 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-lg ${active === "history" ? "bg-blue-600 text-white shadow-lg" : ""
               }`}
           >
             History
@@ -117,7 +113,7 @@ function Navbar({ darkMode, setDarkMode }) {
 
           <button
             onClick={() => {
-             
+
               document.getElementById("home")?.scrollIntoView({
 
                 behavior: "smooth",
@@ -134,15 +130,15 @@ function Navbar({ darkMode, setDarkMode }) {
 
           <button
             onClick={() => {
-            
+
               document.getElementById("editor")?.scrollIntoView({
                 behavior: "smooth",
               });
               setMenuOpen(false);
             }}
             className={`block w-full text-center text-lg font-medium rounded-xl py-3 transition-all duration-300 ${active === "editor"
-                ? "bg-blue-600 text-white"
-                : "hover:bg-blue-600 hover:text-white"
+              ? "bg-blue-600 text-white"
+              : "hover:bg-blue-600 hover:text-white"
               }`}
           >
             💻 Editor
@@ -150,7 +146,7 @@ function Navbar({ darkMode, setDarkMode }) {
 
           <button
             onClick={() => {
-              
+
               document.getElementById("history")?.scrollIntoView({
                 behavior: "smooth",
               });
