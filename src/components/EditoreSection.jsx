@@ -78,10 +78,13 @@ function EditorSection({ darkMode }) {
           <div className="mt-8">
             <LanguageChart history={history} />
           </div>
-          <ReviewHistory
-            history={history}
-            setHistory={setHistory}
-          />
+
+          <div id="history">
+            <ReviewHistory
+              history={history}
+              setHistory={setHistory}
+            />
+          </div>
         </div>
 
       </div>

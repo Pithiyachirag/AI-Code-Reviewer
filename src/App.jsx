@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import EditorSection from "./components/EditoreSection";
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import History from "./pages/History";
-
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -29,31 +26,11 @@ function App() {
         setDarkMode={setDarkMode}
       />
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Routes>
-                <Route
-                  path="/"
-                  element={<Home darkMode={darkMode} />}
-                />
+      <Hero />
 
-                <Route
-                  path="/history"
-                  element={<History />}
-                />
-              </Routes>
-            </>
-          }
-        />
-
-        <Route
-          path="/history"
-          element={<History />}
-        />
-      </Routes>
+      <EditorSection
+        darkMode={darkMode}
+      />
 
       <ScrollToTop />
     </div>

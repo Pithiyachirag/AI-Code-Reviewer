@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 function Navbar({ darkMode, setDarkMode }) {
-  const navigate = useNavigate();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("home");
   useEffect(() => {
@@ -9,7 +9,7 @@ function Navbar({ darkMode, setDarkMode }) {
       const home = document.getElementById("home");
       const editor = document.getElementById("editor");
       const history = document.getElementById("history");
-      
+
       const scrollY = window.scrollY + 120;
 
       if (
@@ -61,9 +61,9 @@ function Navbar({ darkMode, setDarkMode }) {
         <div className="hidden md:flex items-center gap-6 text-gray-700 dark:text-gray-200 font-medium">
           <button
             onClick={() => {
-              setActive("home");
-              navigate("/");
-              setMenuOpen(false);
+              document.getElementById("home")?.scrollIntoView({
+                behavior: "smooth",
+              });
             }}
             className={`px-4 py-2 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-lg ${active === "home" ? "bg-blue-600 text-white shadow-lg" : ""
               }`}
@@ -87,9 +87,9 @@ function Navbar({ darkMode, setDarkMode }) {
 
           <button
             onClick={() => {
-              setActive("history");
-              navigate("/history");
-              setMenuOpen(false);
+              document.getElementById("history")?.scrollIntoView({
+                behavior: "smooth",
+              });
             }}
             className={`px-4 py-2 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-lg ${active === "history" ? "bg-blue-600 text-white shadow-lg" : ""
               }`}
