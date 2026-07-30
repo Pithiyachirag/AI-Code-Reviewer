@@ -2,11 +2,15 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+console.log("API Key:", process.env.GEMINI_API_KEY);
+console.log("Key length:", process.env.GEMINI_API_KEY?.length);
+
 import express from "express";
 import cors from "cors";
 import { GoogleGenAI } from "@google/genai";
 
 // console.log(process.env.GEMINI_API_KEY);
+
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
@@ -179,6 +183,30 @@ Keep the answer:
 
     }
 });
+app.get("/test", async (req, res) => {
+    try {
+        const response = await ai.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: "Say hello",
+        });
+
+        res.json({
+            success: true,
+            text: response.text,
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
