@@ -141,17 +141,25 @@ function ReviewHistory({ history, setHistory }) {
         return (
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-10 mt-8 text-center transition-all duration-300">
 
-                <div className="text-6xl mb-4">
-                    📂
-                </div>
+                <div className="text-6xl mb-4">📂</div>
 
                 <h2 className="text-2xl font-bold text-black dark:text-white">
                     No Reviews Yet
                 </h2>
 
-                <p className="text-gray-500 dark:text-gray-300 mt-3">
+                <p className="text-gray-500 dark:text-gray-300 mt-3 mb-6">
                     Start reviewing your code and your history will appear here.
                 </p>
+
+                <label className="inline-block bg-purple-600 hover:bg-purple-700 text-white px-5 py-3 rounded-lg cursor-pointer transition">
+                    📥 Import JSON
+                    <input
+                        type="file"
+                        accept=".json"
+                        onChange={importJSON}
+                        className="hidden"
+                    />
+                </label>
 
             </div>
         );
