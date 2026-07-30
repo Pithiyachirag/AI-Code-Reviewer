@@ -28,7 +28,7 @@ function ReviewHistory({ history, setHistory }) {
 
     };
     const exportCSV = () => {
-
+        console.log("Export CSV Clicked");
         if (history.length === 0) {
             toast.error("No reviews to export!");
             return;
@@ -39,7 +39,7 @@ function ReviewHistory({ history, setHistory }) {
             ...history.map(item => [
                 item.language,
                 item.time,
-                item.review.replace(/\n/g, " ")
+                (item.review || "").replace(/\n/g, " ")
             ])
         ];
 
@@ -52,14 +52,13 @@ function ReviewHistory({ history, setHistory }) {
         });
 
         const url = URL.createObjectURL(blob);
-
         const link = document.createElement("a");
-
         link.href = url;
-
         link.download = "review-history.csv";
 
+        document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
 
         URL.revokeObjectURL(url);
 
