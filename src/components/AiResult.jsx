@@ -4,6 +4,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useEffect, useState } from "react";
 import { jsPDF } from "jspdf";
+import ChatBox from "./ChatBox";
 
 function AIResult({
   review,
@@ -248,6 +249,7 @@ function AIResult({
         </div>
       )}
       <div className="prose prose-sm sm:prose lg:prose-lg max-w-none dark:prose-invert break-words overflow-x-auto">
+       
         {review ? (
           <ReactMarkdown
             components={{
@@ -284,7 +286,9 @@ function AIResult({
           </p>
         )}
       </div>
-
+        {mode === "review" && review && (
+    <ChatBox review={review} />
+)}
     </div>
   );
 }
